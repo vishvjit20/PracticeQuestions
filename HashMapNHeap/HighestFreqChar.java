@@ -1,3 +1,4 @@
+package HashMapNHeap;
 import java.util.*;
 
 public class HighestFreqChar {
