@@ -15,8 +15,11 @@ public class KLargestElements {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
 
         for (int i = 0; i < n; i++) {
-            pq.add(arr[i]);
-            while(pq.size() > k) pq.remove();
+            if (pq.size() < k) pq.add(arr[i]);
+            else if (pq.peek() < arr[i]) {
+                pq.remove();
+                pq.add(arr[i]);
+            }
         }
 
         while (pq.size() > 0) {
