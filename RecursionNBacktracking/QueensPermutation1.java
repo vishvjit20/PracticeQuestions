@@ -3,10 +3,9 @@ import java.io.*;
 
 public class QueensPermutation1 {
 	public static void queensPermutations(int qpsf, int n, int[][] chess){
-        
 		if (qpsf == n) {
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < n; j++) {
+			for (int i = 0; i < chess.length; i++) {
+				for (int j = 0; j < chess[0].length; j++) {
 					if (chess[i][j] == 0) System.out.print("-\t");
 					else System.out.print("q" + chess[i][j] + "\t");
 				}
@@ -15,7 +14,6 @@ public class QueensPermutation1 {
 			System.out.println();
 			return;
 		}
-		
 		for (int i = 0; i < chess.length; i++) {
 			for (int j = 0; j < chess[0].length; j++) {
 				if (chess[i][j] == 0) {
@@ -25,7 +23,7 @@ public class QueensPermutation1 {
 				}
 			}
 		}
-    }
+	}
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
