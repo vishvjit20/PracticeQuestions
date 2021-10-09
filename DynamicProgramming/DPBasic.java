@@ -321,6 +321,62 @@ public class DPBasic {
 		return least;
 	}
 	
+	public static int partitionsIntoSubset(int n, int k) {
+		int dp[][] = new int[k + 1][n + 1];
+		for (int i = 1; i < dp.length; i++) {
+			for (int j = 1; j < dp[0].length; j++) {
+				if (i > j) dp[i][j] = 0;
+				else if (i == j) dp[i][j] = 1;
+				else dp[i][j] = k * dp[i][j - 1] + dp[i - 1][j - 1];
+			}
+		}
+		return dp[k][n];
+	}
+	
+	public static int buyAndSellStock(int arr[]) {
+		int min = arr[0];
+		int res = 0;
+		for (int i = 1; i < arr.length; i++) {
+			int diff = arr[i] - min;
+			if (diff > 0) res = Math.max(res, diff);
+			else min = arr[i];
+		}	
+		return res;
+	}
+	
+	public static int buyAndSellStock2(int arr[]) {
+		int res = 0;
+		for (int i = 1; i < arr.length; i++) {
+			if (arr[i] - arr[i - 1] > 0) {
+				res += arr[i] - arr[i - 1];
+			}
+		}
+		return res;
+	}
+	
+	public static int friendsPairing(int n) {
+		int dp[] = new int[n + 1];
+		dp[1] = 1; dp[2] = 2;
+		for (int i = 3; i < dp.length; i++) {
+			dp[i] = dp[i - 1] + (i - 1) * dp[i - 2];
+		}
+		return dp[n];
+	}
+	
+	public static long paintFence(int n, int k) {
+		
+		long same = k;
+		long diff = k * (k - 1);
+		long total = same + diff;
+		
+		for (int i = 3; i <= n; i++) {
+			same = diff;
+			diff = total * (k - 1);
+			total = same + diff;
+		}
+		return total;
+	}
+	
 	public static void main(String args[]) {
 //		System.out.println(fibonacci(6));
 //		System.out.println(climbStairs(4));
@@ -357,15 +413,20 @@ public class DPBasic {
 //		int arr[] = {5, 10, 10, 100, 5, 6};
 //		int res = maxSumNonAdj(arr);
 		
-		int arr[][] = {
-						{1, 5, 7},
-						{5, 8, 4},
-						{3, 2, 9},
-						{1, 2, 4},
-					  };
+//		int arr[][] = {
+//						{1, 5, 7},
+//						{5, 8, 4},
+//						{3, 2, 9},
+//						{1, 2, 4},
+//					  };
 //		long res = paintHouse(arr, 4);
 		
-		int res = paintHouse2(arr);
-		System.out.println(res);
+//		int res = paintHouse2(arr);
+//		int res = partitionsIntoSubset(4, 3);
+//		int arr[] = {11, 6, 7, 19, 4, 1, 6, 18, 4};
+//		int res = buyAndSellStock2(arr);
+//		int res = friendsPairing(4);
+		System.out.println(paintFence(8, 3));
+//		System.out.println(res);
 	}
 }
